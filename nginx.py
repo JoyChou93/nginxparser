@@ -2,7 +2,7 @@
 # date:   2018.02.28
 # author: JoyChou
 # desc:   用python解析nginx.confP配置，得到server块及server块的后端IP
-# python: 2.7
+# python: 2.7/3.x
 
 import re
 import os
