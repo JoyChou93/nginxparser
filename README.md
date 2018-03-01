@@ -75,8 +75,8 @@ http {
             fastcgi_pass 127.0.0.1:9000;
             fastcgi_split_path_info ^(.+?.php)(/.*)$; 
             fastcgi_index index.php;
-           include        fastcgi_params;
-           fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
+            include        fastcgi_params;
+            fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;
        }
         
     }
@@ -84,6 +84,19 @@ http {
     server {
         listen       81;
         server_name  test.baidu.com;
+
+
+        location = / {
+
+            proxy_set_header Host $host;
+            proxy_set_header X-Real-IP $mgjip;
+            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+            proxy_http_version 1.1;
+            proxy_set_header Connection "";
+            proxy_pass http://10.10.10.10:8081;
+
+        }
+
     }
 
 
@@ -95,15 +108,5 @@ http {
 return
 
 ``` 
-[{
-	'backend': [],
-	'include': 'fastcgi_params',
-	'server_name': 'localhost',
-	'port': '80'
-}, {
-	'backend': [],
-	'include': '',
-	'server_name': 'test.baidu.com',
-	'port': '81'
-}]
+[{'server_name': 'localhost', 'include': 'fastcgi_params', 'port': '80', 'backend': []}, {'server_name': 'test.baidu.com', 'include': '', 'port': '81', 'backend': [{'backend_ip': '10.10.10.10:8081', 'backend_path': '/'}]}]
 ```
