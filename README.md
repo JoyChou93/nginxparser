@@ -1,9 +1,14 @@
 # nginxparser
 
+## 功能
 
-用了几个开源的`nginxparser`项目，发现都不好用，所以自己实现了一个。
+用python解析nginx配置，获取server块以及server块每个location的后端ip。
 
-## 用法
+## 安装
+
+`wget https://raw.githubusercontent.com/JoyChou93/nginxparser/master/nginx.py`
+
+## 使用
 
 调用代码
 
