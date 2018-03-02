@@ -14,7 +14,7 @@ class NGINX:
         self.conf_path = conf_path
         self.backend = list()  # 保存后端ip和pool name
         self.serverBlock = list()  # 保存解析后端每个server块
-        self.locations = list()
+        self.servers = list()
         self.tmp_conf = '/tmp/tmp_nginx.conf'
         self.all_conf = '/tmp/nginx.conf'
         self.merge_conf()
@@ -158,6 +158,6 @@ class NGINX:
                         'backend': backend_list
                      }
 
-            self.locations.append(server)
+            self.servers.append(server)
 
 

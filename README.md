@@ -1,15 +1,21 @@
 # nginxparser
 
-code
+
+用了几个开源的`nginxparser`项目，发现都不好用，所以自己实现了一个。
+
+## 用法
+
+调用代码
 
 ``` 
 from nginx import NGINX
 
 nginx = NGINX('/usr/local/etc/nginx/nginx.conf')
-print(nginx.locations)
+print(nginx.servers)
 ```
 
-nginx.conf
+`/usr/local/etc/nginx/nginx.conf`配置
+
 ``` 
 #user  nobody;
 worker_processes  1;
@@ -105,8 +111,21 @@ http {
 
 ```
 
-return
+返回
 
 ``` 
-[{'server_name': 'localhost', 'include': 'fastcgi_params', 'port': '80', 'backend': []}, {'server_name': 'test.baidu.com', 'include': '', 'port': '81', 'backend': [{'backend_ip': '10.10.10.10:8081', 'backend_path': '/'}]}]
+[{
+	'server_name': 'localhost',
+	'include': 'fastcgi_params',
+	'port': '80',
+	'backend': []
+}, {
+	'server_name': 'test.baidu.com',
+	'include': '',
+	'port': '81',
+	'backend': [{
+		'backend_ip': '10.10.10.10:8081',
+		'backend_path': '/'
+	}]
+}]
 ```
