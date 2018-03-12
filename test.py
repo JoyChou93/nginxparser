@@ -1,4 +1,4 @@
 from nginx import NGINX
 
-nginx = NGINX('/usr/local/etc/nginx/nginx.conf')
+nginx = NGINX('nginx.conf')
 print(nginx.servers)

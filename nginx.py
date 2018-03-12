@@ -25,7 +25,11 @@ class NGINX:
     def merge_conf(self):
         # 切换到self.conf.path的当前目录
         conf_dir = os.path.dirname(self.conf_path)
-        os.chdir(conf_dir)
+
+        # 判断是否是nginx.py的当前目录
+        if len(conf_dir) != 0:
+            os.chdir(conf_dir)
+
         include_regex = '^[^#]nclude\s*([^;]*);'
 
         # 现将include的文件的内容整合一个文件，并且去掉注释行
@@ -63,7 +67,7 @@ class NGINX:
             alllines = fp.read()
 
             # 获取每个upstream块
-            regex_1 = 'upstream\s+(\w+)\s*{([^}]*)}'
+            regex_1 = 'upstream\s+([^{ ]+)\s*{([^}]*)}'
             upstreams = re.findall(regex_1, alllines)
 
             for up in upstreams:
